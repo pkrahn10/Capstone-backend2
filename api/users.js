@@ -5,7 +5,7 @@ export default router;
 import { createUser } from "#db/queries/users";
 import { getUserByEmailAndPassword } from "#db/queries/users";
 import { createToken } from "#utils/jwt";
-
+// user can register an account
 router
   .route("/register")
   .post(requireBody(["email", "password"]), async (req, res) => {
@@ -19,7 +19,7 @@ router
     }
     res.status(201).send(token);
   });
-
+// user can loggin to an existing account
 router
   .route("/login")
   .post(requireBody(["email", "password"]), async (req, res) => {

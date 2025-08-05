@@ -14,20 +14,18 @@ import { createUser, getUserByUsernameAndPassword } from "#db/queries/users";
 import { signToken } from "#utils/jwt";
 import ordersRouter from "#api/orders";
 import productsRouter from "#api/products";
+import cartRoutes from "#apie/carts";
 
 app.use(cors({ origin: process.env.CORS_ORIGIN ?? /localhost/ }));
-
 app.use(morgan("dev"));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(getUserFromToken);
-
-app.get("/", (req, res) => res.send("Hello, World!"));
-
+app.get("/", (req, res) => res.send("Welcome to 3 Jewels!"));
 app.use("/users", usersRouter);
-
+app.use("/orders", ordersRouter);
+app.use("/products", productsRouter);
+app.use("/api/carts", cartRoutes)
 app.use(handlePostgresErrors);
 app.use((err, req, res, next) => {
   console.error(err);
@@ -71,6 +69,7 @@ app.post(
   }
 );
 
-// API routes
-app.use("/orders", ordersRouter);
-app.use("/products", productsRouter);
+
+
+
+

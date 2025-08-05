@@ -1,4 +1,4 @@
-import db from "../../../db/client.js";
+import db from "#db/client";
 
 export async function createOrder(date, note, user_id) {
   const sql = `
