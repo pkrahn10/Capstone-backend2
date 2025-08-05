@@ -13,7 +13,7 @@ import {
 
 router.route("/:userId", async (req, res) => {
     try {
-        const { userId } = req,params;
+        const { userId } = req.params;
         const cart = await getCartByUserId(userId);
         
         if (!cart) {
