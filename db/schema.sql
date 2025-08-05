@@ -17,6 +17,7 @@ CREATE TABLE products (
   id serial PRIMARY KEY,
   title text NOT NULL,
   description text NOT NULL,
+  image img NOT NULL,
   price decimal NOT NULL
 );
 
@@ -46,5 +47,5 @@ CREATE TABLE cart_items (
   cart_id integer NOT NULL REFERENCES carts(id) ON DELETE CASCADE,
   product_id integer NOT NULL REFERENCES products(id) ON DELETE CASCADE,
   quantity integer NOT NULL,
-  added_at timestamp NOT NULL
+  created_at timestamp NOT NULL
 );

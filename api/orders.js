@@ -19,7 +19,7 @@ import {
 } from "#db/queries/orders";
 
 router.use(requireUser);
-
+// creates a new order
 router.route("/").post(requireBody(["date"]), async (req, res) => {
   try {
     const { date, note } = req.body;
@@ -30,7 +30,7 @@ router.route("/").post(requireBody(["date"]), async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-
+// gets all orders by a specific user
 router.route("/").get(async (req, res) => {
   try {
     const orders = await getOrdersByUserId(req.user.id);
@@ -40,7 +40,7 @@ router.route("/").get(async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-
+// finds a specific order by its id
 router.param("id", async (req, res, next, id) => {
   try {
     const order = await getOrderById(parseInt(id));
@@ -58,11 +58,11 @@ router.param("id", async (req, res, next, id) => {
     res.status(500).send("Internal server error");
   }
 });
-
+// returns the specific order
 router.route("/:id").get(async (req, res) => {
   res.json(req.order);
 });
-
+// gets all products related to a specific order
 router.route("/:id/products").get(async (req, res) => {
   try {
     const products = await getProductsByOrderId(req.order.id);
@@ -72,7 +72,7 @@ router.route("/:id/products").get(async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-
+// add a product to an already existing order
 router
   .route("/:id/products")
   .post(requireBody(["productId", "quantity"]), async (req, res) => {

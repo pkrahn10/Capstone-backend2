@@ -1,9 +1,9 @@
 import db from "#db/client";
 
-import { createProduct } from "./queries/products.js";
-import { createUser } from "./queries/users.js";
-import { createOrder } from "./queries/orders.js";
-import { createOrderProduct } from "./queries/orders_products.js";
+import { createProduct } from "#db/queries/products";
+import { createUser } from "#db/queries/users";
+import { createOrder } from "#db/queries/orders";
+import { createOrderProduct } from "#db/queries/orders_products";
 
 await db.connect();
 await seed();
@@ -12,8 +12,8 @@ console.log("🌱 Database seeded.");
 
 async function seed() {
   // Create a test user
-  const user = await createUser("parker", "testuser", "password123");
-  console.log("Created user:", user.username);
+  const user = await createUser("parker", "test@test.com", "password123");
+  console.log("Created user:", user.name);
 
   // Create at least 10 products
   const products = [];
@@ -31,8 +31,8 @@ async function seed() {
   const order = await createOrder("2024-01-15", "Test order", user.id);
   console.log("Created order:", order.id);
 
-  // Add at least 5 distinct products to the order
-  for (let i = 0; i < 5; i++) {
+  // Add at least 1 distinct products to the order
+  for (let i = 0; i < 1; i++) {
     await createOrderProduct(
       order.id,
       products[i].id,

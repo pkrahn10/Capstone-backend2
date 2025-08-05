@@ -5,7 +5,7 @@ export default router;
 import { getProducts, getProductsById } from "#db/queries/products";
 import { getOrdersByProductId } from "#db/queries/products";
 import requireUser from "#middleware/requireUser";
-
+// fetches the products
 router.route("/").get(async (req, res) => {
   try {
     const products = await getProducts();
@@ -15,7 +15,7 @@ router.route("/").get(async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-
+// finds a product by its id
 router.param("id", async (req, res, next, id) => {
   try {
     const product = await getProductsById(parseInt(id));
@@ -31,7 +31,7 @@ router.param("id", async (req, res, next, id) => {
 router.route("/:id").get(async (req, res) => {
   res.json(req.product);
 });
-
+// gets orders for a specific product
 router.route("/:id/orders").get(requireUser, async (req, res) => {
   try {
     const orders = await getOrdersByProductId(req.product.id, req.user.id);
