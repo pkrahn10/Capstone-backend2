@@ -11,7 +11,7 @@ import {
     removeItemFromCart 
 } from "#db/queries/cart";
 
-router.route("/:userId", async (req, res) => {
+router.route("/:userId").get(async (req, res) => {
     try {
         const { userId } = req.params;
         const cart = await getCartByUserId(userId);
@@ -27,6 +27,4 @@ router.route("/:userId", async (req, res) => {
             error: "Failed to get cart"
         });
     }
-});
-
-
+})
