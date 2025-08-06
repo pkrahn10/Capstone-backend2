@@ -11,6 +11,11 @@ import {
     removeItemFromCart 
 } from "#db/queries/cart";
 
+router.route("/").get(async (req,res) => {
+    const cart = await createCart();
+    res.send(cart);
+});
+
 router.route("/:userId").get(async (req, res) => {
     try {
         const { userId } = req.params;
@@ -28,3 +33,7 @@ router.route("/:userId").get(async (req, res) => {
         });
     }
 })
+
+
+
+
