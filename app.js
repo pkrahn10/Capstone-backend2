@@ -15,7 +15,8 @@ import ordersRouter from "#api/orders";
 import productsRouter from "#api/products";
 import cartRoutes from "#api/cart";
 
-app.use(cors({ origin: process.env.CORS_ORIGIN ?? /localhost/ }));
+// app.use(cors({ origin: process.env.CORS_ORIGIN ?? /localhost/ }));
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,40 +34,40 @@ app.use((err, req, res, next) => {
 
 
 // User routes
-app.post(
-  "/users/register",
-  requireBody(["email", "password"]),
-  async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const user = await createUser(email, password);
-      const token = createToken({ id: user.id });
-      res.status(201).send(token);
-    } catch (error) {
-      console.error("Error creating user:", error);
-      res.status(500).send("Internal server error");
-    }
-  }
-);
+// app.post(
+//   "/users/register",
+//   requireBody(["name", "email", "password"]),
+//   async (req, res) => {
+//     try {
+//       const { email, password } = req.body;
+//       const user = await createUser(email, password);
+//       const token = createToken({ id: user.id });
+//       res.status(201).send(token);
+//     } catch (error) {
+//       console.error("Error creating user:", error);
+//       res.status(500).send("Internal server error");
+//     }
+//   }
+// );
 
-app.post(
-  "/users/login",
-  requireBody(["email", "password"]),
-  async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const user = await getUserByEmailAndPassword(email, password);
-      if (!user) {
-        return res.status(401).send("Invalid credentials");
-      }
-      const token = verifyToken({ id: user.id });
-      res.send(token);
-    } catch (error) {
-      console.error("Error logging in:", error);
-      res.status(500).send("Internal server error");
-    }
-  }
-);
+// app.post(
+//   "/users/login",
+//   requireBody(["name", "email", "password"]),
+//   async (req, res) => {
+//     try {
+//       const { email, password } = req.body;
+//       const user = await getUserByEmailAndPassword(email, password);
+//       if (!user) {
+//         return res.status(401).send("Invalid credentials");
+//       }
+//       const token = verifyToken({ id: user.id });
+//       res.send(token);
+//     } catch (error) {
+//       console.error("Error logging in:", error);
+//       res.status(500).send("Internal server error");
+//     }
+//   }
+// );
 
 
 
