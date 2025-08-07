@@ -38,7 +38,7 @@ router.route("/:userId").get(async (req, res) => {
 router.route("/userId/items").post(async (req,res) => {
     try {
         const { userId } = req.params;
-        const { productId, quantity } = await addItemToCart(userId, productId, quantity);
+        const { productId } = await addItemToCart(userId, productId);
         
         if (!productId) {
             return res.status(404).json({
