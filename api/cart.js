@@ -35,7 +35,7 @@ router.route("/:userId").get(async (req, res) => {
 });
 
 // add item to cart
-router.route("/userId/items").post(async (req,res) => {
+router.route("/:userId/items").post(async (req,res) => {
     try {
         const { userId } = req.params;
         const { productId } = await addItemToCart(userId, productId);
@@ -54,7 +54,7 @@ router.route("/userId/items").post(async (req,res) => {
 });
 
 // update the quantity of an item in cart
-router.route("/userId/items/:productId").put(async (req,res) => {
+router.route("/:userId/items/:productId").put(async (req,res) => {
     try {
         const { userId, productId } = req.params;
         const { quantity } = req.body;
@@ -85,7 +85,7 @@ router.route("/userId/items/:productId").put(async (req,res) => {
 });
 
 // DELETE item from cart
-router.route("/userId/items/:productId").delete(async (req,res) => {
+router.route("/:userId/items/:productId").delete(async (req,res) => {
     try {
        const { userId, productId } = req.params;
        const removedItem = await removeItemFromCart(userId, productId);

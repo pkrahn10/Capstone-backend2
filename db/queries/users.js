@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 export async function createUser(name, email, password) {
   const sql = `
   INSERT INTO users
-    (name,email, password)
+    (name, email, password)
   VALUES
     ($1, $2, $3)
   RETURNING *

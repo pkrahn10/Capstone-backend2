@@ -12,7 +12,7 @@ console.log("🌱 Database seeded.");
 
 async function seed() {
   // Create a test user
-  const user = await createUser("parker", "test@test.com", "password123");
+  const user = await createUser("parker", "parker@test.com", "password");
   console.log("Created user:", user.name);
 
   // Create at least 10 products
