@@ -58,10 +58,7 @@ router.param("id", async (req, res, next, id) => {
     res.status(500).send("Internal server error");
   }
 });
-// returns the specific order
-router.route("/:id").get(async (req, res) => {
-  res.json(req.order);
-});
+
 // gets all products related to a specific order
 router.route("/:id/products").get(async (req, res) => {
   try {
@@ -85,12 +82,13 @@ router
       if (!product) {
         return res.status(400).send("Product not found");
       }
-
+      let price_at_purchase = product.price * quantity
       // Add product to order
       const orderProduct = await createOrderProduct(
         orderId,
         productId,
-        quantity
+        quantity,
+        price_at_purchase
       );
 
       res.status(201).json(orderProduct);
@@ -99,3 +97,8 @@ router
       res.status(500).send("Internal server error");
     }
   });
+  
+  // returns the specific order
+router.route("/:id").get(async (req, res) => {
+  res.json(req.order);
+});

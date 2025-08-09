@@ -25,24 +25,24 @@ import requireBody from "#middleware/requireBody";
   
   
   
-  router.post("/register", requireBody(["name", "email", "password"]), async (req, res) => {
-    const { name, email, password } = req.body;
-    try {
-          const user = await createUser(name, email, password);
-          const token = createToken({id: user.id})
-          res.status(201).json({user: {id: user.id, name: user.name, email: user.email}, token})
-    if (!email) {
-      return res.status(400).send("User not found");
-    }
-    if (!password) {
-      return res.status(400).send("Password not found");
-    }
-    res.status(201).send(token);
-    } catch (error) {
-      console.error("User already exists");
-    }
+  // router.post("/register", requireBody(["name", "email", "password"]), async (req, res) => {
+  //   const { name, email, password } = req.body;
+  //   try {
+  //         const user = await createUser(name, email, password);
+  //         const token = createToken({id: user.id})
+  //         res.status(201).json({user: {id: user.id, name: user.name, email: user.email}, token})
+  //   if (!email) {
+  //     return res.status(400).send("User not found");
+  //   }
+  //   if (!password) {
+  //     return res.status(400).send("Password not found");
+  //   }
+  //   res.status(201).send(token);
+  //   } catch (error) {
+  //     console.error("User already exists");
+  //   }
 
-  });
+  // });
   
   router.post("/login", requireBody(["email", "password"]), async (req, res) => {
   try {
@@ -58,3 +58,15 @@ import requireBody from "#middleware/requireBody";
     res.status(500).send("Internal server error");
   }
 })
+
+router.post("/register", requireBody(["name", "email", "password"]), async (req, res) => {
+    const { name, email, password } = req.body;
+    try {
+        const user = await createUser(name, email, password);
+        const token = createToken({id: user.id});
+        res.status(201).json({user: {id: user.id, name: user.name, email: user.email}, token});
+    } catch (error) {
+        console.error("Registration error:", error);
+        res.status(400).json({error: "User registration failed"});
+    }
+});

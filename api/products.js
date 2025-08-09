@@ -9,6 +9,8 @@ import requireUser from "#middleware/requireUser";
 router.route("/").get(async (req, res) => {
   try {
     const products = await getProducts();
+    console.log(products);
+    
     res.json(products);
   } catch (error) {
     console.error("Error getting products:", error);
@@ -28,10 +30,6 @@ router.param("id", async (req, res, next, id) => {
   }
 });
 
-router.route("/:id").get(async (req, res) => {
-  res.json(req.product);
-});
-// gets orders for a specific product
 router.route("/:id/orders").get(requireUser, async (req, res) => {
   try {
     const orders = await getOrdersByProductId(req.product.id, req.user.id);
@@ -41,3 +39,8 @@ router.route("/:id/orders").get(requireUser, async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
+
+router.route("/:id").get(async (req, res) => {
+  res.json(req.product);
+});
+// gets orders for a specific product
