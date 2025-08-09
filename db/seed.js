@@ -4,6 +4,7 @@ import { createProduct } from "#db/queries/products";
 import { createUser } from "#db/queries/users";
 import { createOrder } from "#db/queries/orders";
 import { createOrderProduct } from "#db/queries/orders_products";
+import { addItemToCart, createCart } from "#db/queries/cart";
 
 await db.connect();
 await seed();
@@ -41,4 +42,10 @@ async function seed() {
     );
     console.log(`Added product ${products[i].id} to order ${order.id}`);
   }
+  
+  const updatedCart = await createCart(user.id);
+  for (let i = 0; i< 5; i++) {
+    await addItemToCart(user.id, products[i].id, Math.ceil(Math.random()*10))
+  }
+  console.log('cart items added here!', updatedCart);
 }

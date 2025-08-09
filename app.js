@@ -25,7 +25,7 @@ app.get("/", (req, res) => res.send("Welcome to 3 Jewels!"));
 app.use("/users", usersRouter);
 app.use("/orders", ordersRouter);
 app.use("/products", productsRouter);
-app.use("/api/carts", cartRoutes)
+app.use("/cart", cartRoutes)
 app.use(handlePostgresErrors);
 app.use((err, req, res, next) => {
   console.error(err);

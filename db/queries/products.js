@@ -50,8 +50,8 @@ export async function getProductsByOrderId(id) {
 export async function getOrdersByProductId(productId, userId) {
   const sql = `
     SELECT o.*
-    FROM orders o
-    JOIN orders_products op ON o.id = op.order_id
+    FROM orders AS o
+    JOIN orders_products AS op ON o.id = op.order_id
     WHERE op.product_id = $1 AND o.user_id = $2
   `;
   const { rows: orders } = await db.query(sql, [productId, userId]);
