@@ -1,5 +1,5 @@
 import db from "#db/client";
-
+// creates the specific order with a product
 export async function createOrderProduct(orderId, productId, quantity, price_at_purchase) {
   const sql = `
     INSERT INTO orders_products 

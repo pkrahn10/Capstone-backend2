@@ -22,7 +22,7 @@ export async function getUserCart(userId) {
     const { rows: [cart] } = await db.query(sql, [userId]);
     return cart;
 }
-
+// gets cart by a specific user
 export async function getCartByUserId(userId) {
     let cart = await getUserCart(userId);
     if (!cart) {

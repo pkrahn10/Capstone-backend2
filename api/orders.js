@@ -77,7 +77,7 @@ router
       const { productId, quantity } = req.body;
       const orderId = req.order.id;
 
-      // Check if product exists
+      // check if product exists
       const product = await getProductsById(productId);
       if (!product) {
         return res.status(400).send("Product not found");
