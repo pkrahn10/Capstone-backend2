@@ -103,15 +103,6 @@ async function seed() {
     products.push(product);
     console.log(`Created product: ${product.title}`); 
   }
-  // for (let i = 1; i <= 15; i++) {
-  //   const product = await createProduct(
-  //     `Product ${i}`,
-  //     `Description for product ${i}`,
-  //     Math.floor(Math.random() * 100) + 1
-  //   );
-  //   products.push(product);
-  //   console.log(`Created product: ${product.title}`);
-  // }
 
   // Create an order for the user
   const order = await createOrder("2024-01-15", "Test order", user.id);
