@@ -29,7 +29,7 @@ router.param("id", async (req, res, next, id) => {
     res.status(500).send("Internal server error");
   }
 });
-
+// getting all orders that contain a specific product
 router.route("/:id/orders").get(requireUser, async (req, res) => {
   try {
     const orders = await getOrdersByProductId(req.product.id, req.user.id);
@@ -43,4 +43,4 @@ router.route("/:id/orders").get(requireUser, async (req, res) => {
 router.route("/:id").get(async (req, res) => {
   res.json(req.product);
 });
-// gets orders for a specific product
+
