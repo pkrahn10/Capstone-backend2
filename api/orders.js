@@ -71,11 +71,10 @@ router.route("/:id/products").get(async (req, res) => {
 });
 // add a product to an already existing order
 router
-  .route("/:id/products")
-  .post(requireBody(["productId", "quantity"]), async (req, res) => {
+  .route("/products")
+  .post(requireBody(["orderId", "productId", "quantity"]), async (req, res) => {
     try {
-      const { productId, quantity } = req.body;
-      const orderId = req.order.id;
+      const { productId, quantity, orderId } = req.body;
 
       // Check if product exists
       const product = await getProductsById(productId);
@@ -90,7 +89,8 @@ router
         quantity,
         price_at_purchase
       );
-
+      console.log(orderProduct);
+      
       res.status(201).json(orderProduct);
     } catch (error) {
       console.error("Error adding product to order:", error);
