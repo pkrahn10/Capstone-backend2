@@ -45,12 +45,13 @@ async function seed() {
     {
       title: "Tiffany Victoria",
       description: "Mixed-cut diamonds and platinum create a striking display of light to these vine drop earrings",
+      image: "https://media.tiffany.com/is/image/tco/66886298_ER_MAIN1X1?hei=628&wid=628",
       price: 53000
     },
     {
       title: "Round white gold earrings",
       description: "These 1.00ctw, VS2 clarity paired with white gold offer a simple yet dazzling appearence",
-      imgae: "https://bfasset.costco-static.com/U447IH35/as/cv48vczv4c738bhn3shp6q/1804624-847__1?auto=webp&amp;format=jpg&width=600&height=600&fit=bounds&canvas=600,600",
+      image: "https://bfasset.costco-static.com/U447IH35/as/cv48vczv4c738bhn3shp6q/1804624-847__1?auto=webp&amp;format=jpg&width=600&height=600&fit=bounds&canvas=600,600",
       price: 2000
     },
     {
@@ -101,7 +102,7 @@ async function seed() {
       productData.price
     );
     products.push(product);
-    console.log(`Created product: ${product.title}`); 
+    // console.log(`Created product: ${product.title}`); 
   }
 
   // Create an order for the user
