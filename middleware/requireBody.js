@@ -14,7 +14,3 @@ export default function requireBody(fields) {
 
 
 
-const obj1 = [1,2,3,4]
-const obj2 = [1,2,3,4]
-
-console.log(obj1 === obj2)
